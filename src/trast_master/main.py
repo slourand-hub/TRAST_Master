@@ -2,7 +2,7 @@ from trast_master.config import Config
 from trast_master.acquisition.moku_runner import run_acquisition
 
 
-def run_analysis(config: Config, logger=print):
+def run_analysis(config: Config, logger=print, block_on_plots: bool = True):
     import os
     import matplotlib.pyplot as plt
 
@@ -99,7 +99,7 @@ def run_analysis(config: Config, logger=print):
 
     logger("\nAll figures opened.")
     plt.ioff()
-    plt.show()
+    plt.show(block=block_on_plots)
 
 
 def main():
