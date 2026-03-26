@@ -168,7 +168,12 @@ def run_task_in_background(state):
         if bad.any():
             state["worker_log"]("WARNING: acquisition windows are not comparable across pulse widths.")
 
-        run_analysis(config, logger=state["worker_log"], block_on_plots=False)
+        run_analysis(
+            config,
+            logger=state["worker_log"],
+            block_on_plots=False,
+            generate_plots=True,
+        )
 
     elif mode == "acquire":
         save_folder = values["output_folder"].strip()
@@ -251,7 +256,12 @@ def run_task_in_background(state):
         state["worker_log"]("Mode: both")
         acquired_folder = run_acquisition(config, logger=state["worker_log"])
         config.folder = acquired_folder
-        run_analysis(config, logger=state["worker_log"], block_on_plots=False)
+        run_analysis(
+            config,
+            logger=state["worker_log"],
+            block_on_plots=False,
+            generate_plots=True,
+        )
 
     else:
         raise ValueError(f"Unsupported mode: {mode}")

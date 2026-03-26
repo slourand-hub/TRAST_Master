@@ -4,43 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c32b8dd0-7b59-4904-b768-c4ba58c0c911" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/TRAST_Master.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/run_app.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/trast_master/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/trast_master/acquisition/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/trast_master/acquisition/moku_runner.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/trast_master/analysis/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/trast_master/analysis/fft_tools.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/trast_master/analysis/loader.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/trast_master/analysis/preprocessing.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/trast_master/analysis/trast_metrics.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/trast_master/config.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/trast_master/gui/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/trast_master/gui/app.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/trast_master/gui/callbacks.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/trast_master/gui/logging_utils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/trast_master/gui/presets.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/trast_master/gui/queue_utils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/trast_master/gui/state.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/trast_master/gui/tables.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/trast_master/gui/validation.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/trast_master/gui/visibility.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/trast_master/gui/worker.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/trast_master/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/trast_master/plotting/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/trast_master/plotting/spectra.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/trast_master/plotting/traces.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/trast_master/plotting/trast_curves.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/trast_master/utils/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/trast_master/utils/logging_utils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/trast_master/utils/paths.py" afterDir="false" />
+    <list default="true" id="c32b8dd0-7b59-4904-b768-c4ba58c0c911" name="Changes" comment="Ver1">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/run_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run_app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/trast_master/gui/callbacks.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/trast_master/gui/callbacks.py" afterDir="false" />
     </list>
+    <list id="47dac5a7-e589-4851-95b3-1b9508fd6d7e" name="Changes1" comment="Changes1" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -56,9 +25,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="3BUS4frblRGko68MGlaYoMXYddR" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -70,6 +39,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python..gitignore.executor": "Run",
     "Python.main.executor": "Run",
     "Python.run_app.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -102,5 +72,16 @@
       <updated>1774541965855</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
