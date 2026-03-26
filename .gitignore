@@ -1,0 +1,12 @@
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Virtual environment
+.venv/
+
+# PyCharm
+.idea/
+
+# Local generated data
+scripts/data/
