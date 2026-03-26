@@ -1,0 +1,48 @@
+import queue
+from tkinter import messagebox
+from trast_master.gui.tables import populate_treeview_from_dataframe
+
+
+def process_worker_queue(state: dict):
+    worker = state["worker"]
+
+    try:
+        while True:
+            kind, payload = worker.queue.get_nowait()
+
+            if kind == "log":
+                state["append_log"](payload)
+
+            elif kind == "tables":
+                acq_df = payload["acq_df"]
+                trast_df = payload["trast_df"]
+
+                populate_treeview_from_dataframe(state["acq_tree"], acq_df)
+                populate_treeview_from_dataframe(state["trast_tree"], trast_df)
+
+            elif kind == "done":
+                state["status_var"].set("Done.")
+                state["append_log"]("Finished successfully.")
+                if "set_controls_enabled" in state:
+                    state["set_controls_enabled"](True)
+
+            elif kind == "error":
+                exc, tb = payload
+                state["status_var"].set("Error.")
+                state["append_log"](f"ERROR: {exc}")
+                state["append_log"](tb)
+                if "set_controls_enabled" in state:
+                    state["set_controls_enabled"](True)
+                messagebox.showerror("Error", str(exc))
+
+    except queue.Empty:
+        pass
+
+    if worker.is_running:
+        state["root"].after(100, lambda: process_worker_queue(state))
+
+
+def make_worker_logger(state: dict):
+    def worker_log(msg):
+        state["worker"].queue.put(("log", str(msg)))
+    return worker_log
