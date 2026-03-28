@@ -8,11 +8,23 @@ class GuiWorker:
         self.thread = None
         self.queue = queue.Queue()
         self.is_running = False
+        self.stop_event = threading.Event()
+
+    @property
+    def stop_requested(self) -> bool:
+        return self.stop_event.is_set()
+
+    def request_stop(self):
+        self.stop_event.set()
+
+    def clear_stop(self):
+        self.stop_event.clear()
 
     def start(self, target, *args, **kwargs):
         if self.is_running:
             raise RuntimeError("A task is already running.")
 
+        self.clear_stop()
         self.is_running = True
 
         def runner():

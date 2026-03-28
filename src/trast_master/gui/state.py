@@ -58,7 +58,23 @@ def create_gui_state():
         "acq_error_var": tk.StringVar(value=""),
         "preset_name_var": tk.StringVar(value="Preset: default"),
 
+        # NEW: workflow labels
+        "stage1_title_var": tk.StringVar(value="Stage 1 — Acquisition"),
+        "stage2_title_var": tk.StringVar(value="Stage 2 — Analysis"),
+
+        # NEW: hardware preview box
+        "hw_connection_var": tk.StringVar(value="Connection: not tested"),
+        "hw_trigger_var": tk.StringVar(value="Trigger: -"),
+        "hw_acquisition_var": tk.StringVar(value="Acquisition mode: -"),
+        "hw_output_var": tk.StringVar(value="Waveform: -"),
+
         "worker": GuiWorker(),
+
+        "progress_value_var": tk.DoubleVar(value=0.0),
+        "progress_stage_var": tk.StringVar(value="Idle"),
+        "progress_detail_var": tk.StringVar(value="No active run."),
+        "run_controls_hint_var": tk.StringVar(value="Ready to run."),
+
     }
 
     return root, state

@@ -2,7 +2,12 @@ from trast_master.config import Config
 from trast_master.acquisition.moku_runner import run_acquisition
 
 
-def run_analysis(config: Config, logger=print, block_on_plots: bool = True):
+def run_analysis(
+    config: Config,
+    logger=print,
+    block_on_plots: bool = True,
+    generate_plots: bool = True,
+):
     import os
     import matplotlib.pyplot as plt
 
@@ -78,28 +83,31 @@ def run_analysis(config: Config, logger=print, block_on_plots: bool = True):
         acq_df.to_csv(out_csv_acq, index=False)
         logger(f"Saved CSV: {out_csv_acq}")
 
-    plot_main_trast_overlay(
-        df,
-        x_axis=config.x_axis,
-        main_fft_max_harmonics=config.main_fft_max_harmonics,
-        include_ls_trast=config.include_ls_trast,
-    )
+    if generate_plots:
+        plot_main_trast_overlay(
+            df,
+            x_axis=config.x_axis,
+            main_fft_max_harmonics=config.main_fft_max_harmonics,
+            include_ls_trast=config.include_ls_trast,
+        )
 
-    plot_raw_harmonic_ratio_curves(
-        df,
-        x_axis=config.x_axis,
-        diagnostic_harmonics=config.diagnostic_harmonics,
-    )
+        plot_raw_harmonic_ratio_curves(
+            df,
+            x_axis=config.x_axis,
+            diagnostic_harmonics=config.diagnostic_harmonics,
+        )
 
-    plot_raw_normalized_spectra(
-        df,
-        n_spectrum_pulsewidths=config.n_spectrum_pw,
-        max_h=config.max_harmonic,
-    )
+        plot_raw_normalized_spectra(
+            df,
+            n_spectrum_pulsewidths=config.n_spectrum_pw,
+            max_h=config.max_harmonic,
+        )
 
-    logger("\nAll figures opened.")
-    plt.ioff()
-    plt.show(block=block_on_plots)
+        logger("\nAll figures opened.")
+        plt.ioff()
+        plt.show(block=block_on_plots)
+    else:
+        logger("\nAnalysis completed (plot rendering skipped in background mode).")
 
 
 def main():
@@ -110,8 +118,8 @@ def main():
     elif config.mode == "analyze":
         run_analysis(config)
     elif config.mode == "both":
-        run_acquisition(config)
-        config.folder = config.output_folder
+        acquired_folder = run_acquisition(config)
+        config.folder = acquired_folder
         run_analysis(config)
     elif config.mode == "gui":
         from trast_master.gui.app import launch_gui

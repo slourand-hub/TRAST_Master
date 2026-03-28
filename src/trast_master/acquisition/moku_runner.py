@@ -28,18 +28,33 @@ def pulsewidths_seconds_from_config(config: Config):
     return np.asarray(config.pulsewidths_us, dtype=float) * 1e-6
 
 
-def run_acquisition(config: Config, logger=print):
+def run_acquisition(config: Config, logger=print, stop_event=None, progress_cb=None):
+    def stopped() -> bool:
+        return stop_event is not None and stop_event.is_set()
+
+    def update_progress(value: float, stage: str, detail: str):
+        if progress_cb is not None:
+            progress_cb(value, stage, detail)
+
     validate_acquisition_config(config)
 
     output_dir = Path(config.output_folder)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    logger(f"Acquisition started")
+    logger("Acquisition started")
     logger(f"Output folder: {output_dir}")
 
     pulsewidths_s = pulsewidths_seconds_from_config(config)
+    total_steps = len(pulsewidths_s) * config.num_frames_per_width
+    completed_steps = 0
 
-    for pw_s in pulsewidths_s:
+    update_progress(1, "Preparing acquisition", f"Output folder: {output_dir}")
+
+    for pw_idx, pw_s in enumerate(pulsewidths_s):
+        if stopped():
+            safe_stop_waveform(logger=logger)
+            raise RuntimeError("Run stopped by user.")
+
         duty_fraction = config.duty_percent / 100.0
         period_s = pw_s / duty_fraction
         f0_hz = 1.0 / period_s
@@ -53,6 +68,18 @@ def run_acquisition(config: Config, logger=print):
         )
 
         for frame_idx in range(config.num_frames_per_width):
+            if stopped():
+                safe_stop_waveform(logger=logger)
+                raise RuntimeError("Run stopped by user.")
+
+            detail = (
+                f"Pulse width {pw_idx + 1}/{len(pulsewidths_s)} | "
+                f"Frame {frame_idx + 1}/{config.num_frames_per_width} | "
+                f"{pw_s * 1e6:.3f} us"
+            )
+            progress = 5.0 + 70.0 * (completed_steps / max(total_steps, 1))
+            update_progress(progress, "Acquiring", detail)
+
             logger(f"  Frame {frame_idx + 1}/{config.num_frames_per_width}")
 
             # Placeholder synthetic signal
@@ -83,8 +110,12 @@ def run_acquisition(config: Config, logger=print):
 
             logger(f"    Saved: {save_path.name}")
 
+            completed_steps += 1
+
             if config.settle_time_s > 0:
                 time.sleep(config.settle_time_s)
 
     safe_stop_waveform(logger=logger)
+    update_progress(80.0, "Finishing acquisition", "Acquisition loop completed.")
     logger("Acquisition finished")
+    return str(output_dir)
